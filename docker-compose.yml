@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+
+  medialist-node17:
+    container_name: medialist-node17
+    build: node/
+    tty: true
+    ports:
+      - "3002:3000"
+    working_dir: /var/www/medialist
+    volumes:
+      - ./:/var/www/medialist
+    networks:
+      - medialist-network
+
+networks:
+  medialist-network:
+    driver: bridge
