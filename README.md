@@ -1,4 +1,5 @@
-Run:
+Inside the Node container, run:
+- npx sequelize-cli db:migrate
 - DEBUG=medialist:* npm start
 
 Tech Stack:
