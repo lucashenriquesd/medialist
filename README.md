@@ -1,3 +1,6 @@
+Run:
+- DEBUG=medialist:* npm start
+
 Tech Stack:
 - Node.js
 - Express
@@ -6,3 +9,4 @@ Tech Stack:
 - Git
 - Postgres
 - Sequelize
+- dotenv
