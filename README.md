@@ -9,4 +9,7 @@ Tech Stack:
 - Git
 - Postgres
 - Sequelize
+- sequelize-cli
 - dotenv
+- pg
+- pg-hstore
