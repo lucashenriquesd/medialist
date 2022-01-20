@@ -7,7 +7,7 @@ exports.index = async function(req, res) {
 };
 
 exports.show = async function(req, res) {
-    const user = await User.findByPk(req.body.id);
+    const user = await User.findByPk(req.params.id);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(user, null, 2));
 };
