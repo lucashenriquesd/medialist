@@ -27,6 +27,15 @@ exports.update = async function(req, res) {
     res.send(JSON.stringify({ "msg": `User ${req.params.id} updated` }, null, 2));
 };
 
+exports.delete = async function(req, res) {
+    const id = parseInt(req.params.id);
+    const user = await User.findByPk(id);
+
+    await user.destroy();
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ "msg": `User ${req.params.id} deleted` }, null, 2));
+};
+
 exports.store = async function(req, res) {
     const user = await User.create(req.body);
     res.send(`User ${req.body.name} created`);

@@ -7,6 +7,6 @@ router.get('/', user_controller.index);
 router.get('/:id', user_controller.show);
 router.post('/', user_controller.store);
 router.put('/:id', user_controller.update);
-// router.delete('/:id', );
+router.delete('/:id', user_controller.delete);
 
 module.exports = router;
