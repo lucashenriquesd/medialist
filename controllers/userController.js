@@ -12,24 +12,22 @@ exports.index = async function(req, res) {
 };
 
 exports.show = async function(req, res) {
-    const id = parseInt(req.params.id);
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { uuid: req.params.uuid } });
 
     if (user === null) {
-        await res.status(404).send({ "msg": `User ${id} not found` });
+        await res.status(404).send({ "msg": `User ${req.params.uuid} not found` });
         return;
     }
 
-    res.send(JSON.stringify(user, null, 2));
+    res.send(user);
 };
 
 exports.update = async function(req, res) {
-    const id = parseInt(req.params.id);
     const { name, nickName } = req.body;
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { uuid: req.params.uuid } });
 
     if (user === null) {
-        await res.status(404).send({ "msg": `User ${id} not found` });
+        await res.status(404).send({ "msg": `User ${req.params.uuid} not found` });
         return;
     }
     user.set({
@@ -39,21 +37,20 @@ exports.update = async function(req, res) {
 
     await user.save();
     res.setHeader('Content-Type', 'application/json');
-    res.send({ "msg": `User ${id} updated` });
+    res.send({ "msg": `User ${req.params.uuid} updated` });
 };
 
 exports.delete = async function(req, res) {
-    const id = parseInt(req.params.id);
-    const user = await User.findByPk(id);
+    const user = await User.findOne({ where: { uuid: req.params.uuid } });
 
     if (user === null) {
-        await res.status(404).send({ "msg": `User ${id} not found` });
+        await res.status(404).send({ "msg": `User ${req.params.uuid} not found` });
         return;
     }
 
     await user.destroy();
     res.setHeader('Content-Type', 'application/json');
-    res.send({ "msg": `User ${id} deleted` });
+    res.send({ "msg": `User ${req.params.uuid} deleted` });
 };
 
 exports.store = async function(req, res) {
