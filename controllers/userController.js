@@ -6,6 +6,12 @@ exports.index = async function(req, res) {
     res.send(JSON.stringify(users, null, 2));
 };
 
+exports.show = async function(req, res) {
+    const user = await User.findByPk(req.body.id);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(user, null, 2));
+};
+
 exports.store = async function(req, res) {
     const user = await User.create(req.body);
     res.send(`User ${req.body.name} created`);
