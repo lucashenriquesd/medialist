@@ -3,7 +3,9 @@ services:
 
   node:
     container_name: medialist-node
-    build: node/
+    build:
+      context: ./
+      dockerfile: node/Dockerfile
     tty: true
     ports:
       - "3002:3000"
