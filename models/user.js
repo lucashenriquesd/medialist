@@ -15,16 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   User.init({
     name: DataTypes.STRING,
     nickName: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: {
-      type: DataTypes.STRING,
-      set(plainTextPassword) {
-        this.setDataValue('password', bcrypt.hashSync(plainTextPassword, parseInt(process.env.SALT_ROUNDS)));
-      }
-    },
+    password: DataTypes.STRING,
     uuid: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
@@ -36,5 +32,16 @@ module.exports = (sequelize, DataTypes) => {
       attributes: { exclude: ['password'] },
     }
   });
+
+  User.beforeCreate((user, options) => {
+    return bcrypt.hash(user.password, parseInt(process.env.SALT_ROUNDS))
+        .then(hash => {
+            user.password = hash;
+        })
+        .catch(err => { 
+            throw new Error(); 
+        });
+  });
+
   return User;
 };
