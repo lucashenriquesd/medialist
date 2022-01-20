@@ -14,3 +14,4 @@ Tech Stack:
 - dotenv
 - pg
 - pg-hstore
+- nodemon
