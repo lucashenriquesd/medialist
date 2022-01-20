@@ -1,7 +1,9 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -17,7 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     nickName: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      set(plainTextPassword) {
+        this.setDataValue('password', bcrypt.hashSync(plainTextPassword, parseInt(process.env.SALT_ROUNDS)));
+      }
+    },
     uuid: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4

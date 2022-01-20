@@ -1,4 +1,5 @@
 Inside the Node container, run:
+- npm install
 - npx sequelize-cli db:migrate
 - nodemon "DEBUG=medialist:* npm start"
 
@@ -15,3 +16,4 @@ Tech Stack:
 - pg
 - pg-hstore
 - nodemon
+- bcrypt
