@@ -6,7 +6,7 @@ var user_controller = require('../controllers/userController');
 router.get('/', user_controller.index);
 router.get('/:id', user_controller.show);
 router.post('/', user_controller.store);
-// router.put('/users/:id', );
-// router.delete('/users/:id', );
+router.put('/:id', user_controller.update);
+// router.delete('/:id', );
 
 module.exports = router;
