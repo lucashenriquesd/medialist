@@ -7,9 +7,9 @@ services:
     tty: true
     ports:
       - "3002:3000"
-    working_dir: /var/www/medialist
+    working_dir: /usr/src/app
     volumes:
-      - ./:/var/www/medialist
+      - ./:/usr/src/app
     networks:
       - medialist-network
 
