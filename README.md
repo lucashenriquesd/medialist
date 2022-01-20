@@ -1,7 +1,7 @@
 Inside the Node container, run:
 - npm install
 - npx sequelize-cli db:migrate
-- nodemon "DEBUG=medialist:* npm start"
+- npm run dev
 
 Tech Stack:
 - Node.js
