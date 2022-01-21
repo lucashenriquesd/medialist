@@ -9,4 +9,6 @@ router.post('/', user_controller.store);
 router.put('/:uuid', user_controller.update);
 router.delete('/:uuid', user_controller.delete);
 
+router.post('/login', user_controller.login);
+
 module.exports = router;

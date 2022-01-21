@@ -27,10 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'User',
-    defaultScope: {
-      attributes: { exclude: ['password'] },
-    }
+    modelName: 'User'
   });
 
   User.beforeCreate((user, options) => {

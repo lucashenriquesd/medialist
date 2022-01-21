@@ -1,3 +1,6 @@
+- Clone this project
+- Copy .env.example to .env
+
 Inside the Node container, run:
 - npm install
 - npx sequelize-cli db:migrate

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
 exports.index = async function(req, res) {
@@ -20,6 +21,11 @@ exports.show = async function(req, res) {
     }
 
     res.send(user);
+};
+
+exports.store = async function(req, res) {
+    const user = await User.create(req.body);
+    res.send({ "msg": `User ${req.body.name} created` });
 };
 
 exports.update = async function(req, res) {
@@ -53,7 +59,19 @@ exports.delete = async function(req, res) {
     res.send({ "msg": `User ${req.params.uuid} deleted` });
 };
 
-exports.store = async function(req, res) {
-    const user = await User.create(req.body);
-    res.send({ "msg": `User ${req.body.name} created` });
+exports.login = async function(req, res) {
+    const user = await User.findOne({ where: { email: req.body.email } });
+
+    if (user) {
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (validPassword) {
+            res.status(200).json({ message: "Login successful" });
+            return;
+        }
+
+        res.status(400).json({ error: "Login failed" });
+        return;
+    }
+
+    res.status(400).json({ error: "Login failed" });
 };
